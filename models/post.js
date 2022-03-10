@@ -7,7 +7,8 @@ const postSchema = new mongoose.Schema({
     postDateString: String, 
     postFirstname: String, 
     postLastname: String,
-    postEmail: String
+    postEmail: String,
+    postImage: String
 })
 
 const Post = mongoose.model("Post", postSchema)

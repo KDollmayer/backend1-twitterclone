@@ -5,7 +5,7 @@
         
             <div class="col-5 justify-content-center">
                 <form method="POST" action="/entries">
-                <textarea name="entry" class="form-control" rows="3"  maxlength="140" placeholder="Say something nice!"></textarea>
+                <textarea name="postContent" class="form-control" rows="3"  maxlength="140" placeholder="Say something nice!"></textarea>
                 <button type="submit" class="btn m-2 btn-primary rounded-pill">Tweet</button>
                 </form>
             </div>
@@ -25,7 +25,7 @@
                             <div class="col-1"> 
                               <a href="/users/<%= item.postUser%>"> 
                                   <img 
-                                  src="/<%= item.postPhoto %>" 
+                                  src="/<%= item.postImage %>" 
                                   class="rounded-circle" 
                                   alt="profile picture" 
                                   height="50px" 

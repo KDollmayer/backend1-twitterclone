@@ -1,0 +1,76 @@
+<%- include("partials/header.ejs") %>
+
+       
+        <img src="/<%= profilePicture %>" alt="profile picture" height="150px" width="100px">
+
+        <h2> Username: <%= username %> </h2>
+        <h3> First name: <%= firstname %> </h3>
+        <h3> Last name: <%= lastname %> </h3>
+        <h3> E-mail: <%= email %> </h3>
+
+        <br/>
+
+        <form action="/index">
+        <input action="/index" type="submit" value="Back">
+        </form>                
+
+        <h1>Edit user profile</h1>
+
+        <h2>Photo upload</h2>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+                <input name="file" type="file">
+                <button type="submit">Upload file</button>
+        </form>
+
+        <form action="/edit_user" method="POST">
+                First name: <input type="text" name="firstname"><br/>
+                <br/>
+                Last name: <input type="text" name="lastname"><br/>
+                <br/>
+                E-mail: <input type="email" name="email"><br/>
+                <br/>
+                <button type="submit">Edit user</button>
+            </form>
+
+
+            
+
+        
+            <% entries.forEach((item) => { %>
+                <% if (item.entryUser === username) { %>
+
+                    <div class="row mb-3  justify-content-center " >
+                        <h3 class="text-center">Tweets</h3>
+        
+                        <ul>
+                            
+                                <div class="row mb-3 justify-content-center">
+                                <div class="card w-75 ">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-1"> 
+                                              <a href="/users/<%= item.entryUser%>"> <img src="/<%= item.entryPhoto %>" class="rounded-circle" alt="profile picture" height="50px" width="50px"></a> 
+                                            </div>
+                                            <div class="col pt-2">
+                                                <h5 class="card-title"><%= item.entryUser %></h5>
+                                            </div>
+                                        </div>
+                                      
+                                      <p class="card-text pt-2"><%= item.entry%></p>
+                                      <p class="fw-lighter mb-1"> <%= item.entryDateString %> </p>
+                                    </div>
+                                  </div>
+                                </div>
+                                
+                                    
+                               
+        
+                            
+                        </ul>
+                
+                    </div>
+             <% } %>  
+        <% }) %>
+        
+
+<%- include("partials/footer.ejs") %>
