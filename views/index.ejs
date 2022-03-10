@@ -1,0 +1,53 @@
+<%- include("partials/header.ejs") %>
+<div class="container ">
+            
+    <div class="row mb-3  justify-content-center " >
+        
+            <div class="col-5 justify-content-center">
+                <form method="POST" action="/entries">
+                <textarea name="entry" class="form-control" rows="3"  maxlength="140" placeholder="Say something nice!"></textarea>
+                <button type="submit" class="btn m-2 btn-primary rounded-pill">Tweet</button>
+            </form>
+            </div>
+            
+    
+    </div>
+
+    <div class="row mb-3  justify-content-center " >
+        <h3 class="text-center">Tweets</h3>
+
+        <ul>
+            <% entries.forEach((item) => { %>
+                <div class="row mb-3 justify-content-center">
+                <div class="card w-75 ">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-1"> 
+                              <a href="/users/<%= item.entryUser%>"> <img src="/<%= item.entryPhoto %>" class="rounded-circle" alt="profile picture" height="50px" width="50px"></a> 
+                            </div>
+                            <div class="col pt-2">
+                                <h5 class="card-title"><%= item.entryUser %></h5>
+                            </div>
+                        </div>
+                      
+                      <p class="card-text pt-2"><%= item.entry%></p>
+                      <p class="fw-lighter mb-1"> <%= item.entryDateString %> </p>
+                    </div>
+                  </div>
+                </div>
+                
+                    <% }) %>
+               
+
+            
+        </ul>
+
+    </div>
+
+
+</div>
+
+
+
+
+<%- include("partials/footer.ejs") %>
