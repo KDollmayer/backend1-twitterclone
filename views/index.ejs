@@ -7,7 +7,7 @@
                 <form method="POST" action="/entries">
                 <textarea name="entry" class="form-control" rows="3"  maxlength="140" placeholder="Say something nice!"></textarea>
                 <button type="submit" class="btn m-2 btn-primary rounded-pill">Tweet</button>
-            </form>
+                </form>
             </div>
             
     
@@ -17,21 +17,28 @@
         <h3 class="text-center">Tweets</h3>
 
         <ul>
-            <% entries.forEach((item) => { %>
+            <% posts.forEach((item) => { %>
                 <div class="row mb-3 justify-content-center">
                 <div class="card w-75 ">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-1"> 
-                              <a href="/users/<%= item.entryUser%>"> <img src="/<%= item.entryPhoto %>" class="rounded-circle" alt="profile picture" height="50px" width="50px"></a> 
+                              <a href="/users/<%= item.postUser%>"> 
+                                  <img 
+                                  src="/<%= item.postPhoto %>" 
+                                  class="rounded-circle" 
+                                  alt="profile picture" 
+                                  height="50px" 
+                                  width="50px">
+                                </a> 
                             </div>
                             <div class="col pt-2">
-                                <h5 class="card-title"><%= item.entryUser %></h5>
+                                <h5 class="card-title"><%= item.postUser %></h5>
                             </div>
                         </div>
                       
-                      <p class="card-text pt-2"><%= item.entry%></p>
-                      <p class="fw-lighter mb-1"> <%= item.entryDateString %> </p>
+                      <p class="card-text pt-2"><%= item.postContent%></p>
+                      <p class="fw-lighter mb-1"> <%= item.postDateString %> </p>
                     </div>
                   </div>
                 </div>
