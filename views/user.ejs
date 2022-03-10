@@ -1,0 +1,60 @@
+<%- include("partials/header.ejs") %>
+
+<div>
+
+        <img src="/<%= userPosts[userPosts.length-1].postImage %>" alt="Profile picture" height="200px" width="200px" border-radius="50%">
+       
+
+        <h2> Username: <%= userPosts[userPosts.length-1].postUser %> </h2>
+        <h3> First name: <%= userPosts[userPosts.length-1].postFirstname %> </h3>
+        <h3> Last name: <%= userPosts[userPosts.length-1].postLastname %> </h3>
+        <h3> E-mail: <%= userPosts[userPosts.length-1].postEmail %> </h3>
+
+        <br/>
+
+        
+
+        <br/>
+
+        <h2> <%= userPosts[userPosts.length-1].postUser%>'s Tweets</h2>
+
+        <div class="row mb-3  justify-content-center " >
+                <h3 class="text-center">Tweets</h3>
+
+                <ul>
+                    <% userPosts.forEach((item) => { %>
+                        <div class="row mb-3 justify-content-center">
+                        <div class="card w-75 ">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-1"> 
+                                      <a href="/users/<%= item.postUser%>"> <img src="/<%= item.postImage %>" class="rounded-circle" alt="profile picture" height="50px" width="50px"></a> 
+                                    </div>
+                                    <div class="col pt-2">
+                                        <h5 class="card-title"><%= item.postUser %></h5>
+                                    </div>
+                                </div>
+                              
+                              <p class="card-text pt-2"><%= item.postContent%></p>
+                              <p class="fw-lighter mb-1"> <%= item.postDateString %> </p>
+                            </div>
+                          </div>
+                        </div>
+                        
+                            <% }) %>
+                       
+
+                    
+                </ul>
+        
+            </div>
+
+</div>
+
+
+
+
+        
+
+
+<%- include("partials/footer.ejs") %>

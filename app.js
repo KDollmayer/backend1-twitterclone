@@ -21,6 +21,12 @@ var storage = multer.diskStorage({
   })
   
 const upload = multer({ storage: storage })
+app.use(express.static("public"))
+app.use(express.static("files"))
+app.use(express.static("public/image_user"))
+app.use(upload.single("file"))
+
+
 
 passport.use(User.createStrategy())
 passport.serializeUser(User.serializeUser())
@@ -55,6 +61,30 @@ app.get("/login", (req, res) => {
 
 app.get("/signup", (req, res) => {
     res.render("./signup.ejs")
+})
+app.get("/users/:userId", requireLogin, async (req, res) => {
+
+    const userInfo = await User.find({ username: req.params.userId })
+    const userPosts = await Post.find({ postUser: req.params.userId })
+    console.log(req.params.userId)
+    console.log(userPosts, userInfo)
+    res.render("user.ejs", { userPosts, userInfo })
+})
+app.get("/profile", requireLogin, async (req, res) => {
+
+    var sortDate = { postDate: -1 };
+    const posts = await Post.find().sort(sortDate)
+    
+
+    res.render("./profile.ejs", {
+        username: req.user.username,
+        firstname: req.user.firstname,
+        lastname: req.user.lastname,
+        email: req.user.email,
+        profileImage: req.user.profileImage,
+        postImage: req.user.profileImage,
+        posts
+        })
 })
 
 app.get("/index", requireLogin, async (req, res) => {

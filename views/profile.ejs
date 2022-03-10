@@ -1,7 +1,7 @@
 <%- include("partials/header.ejs") %>
 
        
-        <img src="/<%= profilePicture %>" alt="profile picture" height="150px" width="100px">
+        <img src="/<%= profileImage %>" alt="profile picture" height="150px" width="100px">
 
         <h2> Username: <%= username %> </h2>
         <h3> First name: <%= firstname %> </h3>
@@ -10,9 +10,7 @@
 
         <br/>
 
-        <form action="/index">
-        <input action="/index" type="submit" value="Back">
-        </form>                
+                      
 
         <h1>Edit user profile</h1>
 
@@ -36,8 +34,8 @@
             
 
         
-            <% entries.forEach((item) => { %>
-                <% if (item.entryUser === username) { %>
+            <% posts.forEach((item) => { %>
+                <% if (item.postUser === username) { %>
 
                     <div class="row mb-3  justify-content-center " >
                         <h3 class="text-center">Tweets</h3>
@@ -49,15 +47,15 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-1"> 
-                                              <a href="/users/<%= item.entryUser%>"> <img src="/<%= item.entryPhoto %>" class="rounded-circle" alt="profile picture" height="50px" width="50px"></a> 
+                                              <a href="/users/<%= item.postUser%>"> <img src="/<%= item.postImage %>" class="rounded-circle" alt="profile picture" height="50px" width="50px"></a> 
                                             </div>
                                             <div class="col pt-2">
-                                                <h5 class="card-title"><%= item.entryUser %></h5>
+                                                <h5 class="card-title"><%= item.postUser %></h5>
                                             </div>
                                         </div>
                                       
-                                      <p class="card-text pt-2"><%= item.entry%></p>
-                                      <p class="fw-lighter mb-1"> <%= item.entryDateString %> </p>
+                                      <p class="card-text pt-2"><%= item.postContent%></p>
+                                      <p class="fw-lighter mb-1"> <%= item.postDateString %> </p>
                                     </div>
                                   </div>
                                 </div>
