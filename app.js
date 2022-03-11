@@ -66,11 +66,11 @@ app.get("/users/:userId", requireLogin, async (req, res) => {
 
     const userInfo = await User.find({ username: req.params.userId })
     const userPosts = await Post.find({ postUser: req.params.userId })
-    console.log(req.params.userId)
-    console.log(userPosts, userInfo)
+    
+    console.log(userPosts)
     res.render("user.ejs", { userPosts, userInfo })
 })
-app.get("/profile", requireLogin, async (req, res) => {
+app.get("/profile" , requireLogin ,  async (req, res) => { 
 
     var sortDate = { postDate: -1 };
     const posts = await Post.find().sort(sortDate)
@@ -91,11 +91,13 @@ app.get("/index", requireLogin, async (req, res) => {
     
     var sortDate = { postDate: -1 };
     const posts = await Post.find().sort(sortDate)
+   
 
     if (req.user) {
         res.render("./index.ejs", {
             username: req.user.username, 
             firstname:req.user.firstname, 
+            
             posts 
             })
     } else {

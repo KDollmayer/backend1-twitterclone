@@ -1,74 +1,106 @@
 <%- include("partials/header.ejs") %>
 
-       
-        <img src="/<%= profileImage %>" alt="profile picture" height="150px" width="100px">
+  <div class="container ">
 
-        <h2> Username: <%= username %> </h2>
-        <h3> First name: <%= firstname %> </h3>
-        <h3> Last name: <%= lastname %> </h3>
-        <h3> E-mail: <%= email %> </h3>
+    <div class="row justify-content-center">
+      <div class="card mb-3" style="max-width: 700px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="/<%= profileImage %>" class="m-3 mb-0 rounded" height="170px" style="max-width: 200px;"
+              alt="profile Picture">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">
+                <%= username %>
+              </h5>
+              <p class="card-text">First name: <%= firstname %>
+              </p>
+              <p class="card-text">Last name: <%= lastname %>
+              </p>
+              <p class="card-text">E-mail: <%= email %>
+              </p>
 
-        <br/>
 
-                      
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row m-0">
 
-        <h1>Edit user profile</h1>
+      <form class="row " action="/upload" method="POST" enctype="multipart/form-data">
+        <div class="col-md-6">
+          <input name="file" type="file" class="form-control">
+        </div>
+        <div class="col-md-6">
+          <button class="btn btn-primary pt-1" type="submit">Upload file</button>
 
-        <h2>Photo upload</h2>
-        <form action="/upload" method="POST" enctype="multipart/form-data">
-                <input name="file" type="file">
-                <button type="submit">Upload file</button>
-        </form>
+        </div>
+      </form>
+      <form class="row " action="/edit_user" method="POST">
+        <div class="col-md-6 ">
+          <input type="text" class="form-control" placeholder="Firstname" name="firstname">
+        </div>
+        <div class="col-md-6 ">
+          <input type="text" class="form-control" placeholder="Lastname" name="lastname">
+        </div>
+        <div class="col-md-6 pt-3 ">
+          <input type="email" class="form-control" placeholder="E-mail" name="email">
+        </div>
+        <div class="col-md-6 pt-3">
+          <button class="btn btn-primary" type="submit">Edit user</button>
+        </div>
 
-        <form action="/edit_user" method="POST">
-                First name: <input type="text" name="firstname"><br/>
-                <br/>
-                Last name: <input type="text" name="lastname"><br/>
-                <br/>
-                E-mail: <input type="email" name="email"><br/>
-                <br/>
-                <button type="submit">Edit user</button>
-            </form>
+      </form>
+    </div>
+    <div class="row m-2 justify-content-center">
+
+      <% posts.forEach((item)=> { %>
+        <% if (item.postUser===username) { %>
+
+          <div class="row   ">
+            <h3 class="text-center">Tweets</h3>
+
+            
+
+              <div class="row justify-content-center">
+                <div class="card w-100 ">
+                  <div class="card-body">
+                    <div class="row ">
+                      <div class="col-2">
+                        <a href="/users/<%= item.postUser%>"> <img src="/<%= profileImage %>" class="rounded-circle"
+                            alt="profile picture" height="50px" width="50px"></a>
+                      </div>
+                      <div class="col m-1 pt-2">
+                        <h5 class="card-title">
+                          <%= item.postUser %>
+                        </h5>
+                      </div>
+                    </div>
+
+                    <p class="card-text pt-2">
+                      <%= item.postContent%>
+                    </p>
+                    <p class="fw-lighter mb-1">
+                      <%= item.postDateString %>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+
+
 
 
             
 
-        
-            <% posts.forEach((item) => { %>
-                <% if (item.postUser === username) { %>
+          </div>
 
-                    <div class="row mb-3  justify-content-center " >
-                        <h3 class="text-center">Tweets</h3>
-        
-                        <ul>
-                            
-                                <div class="row mb-3 justify-content-center">
-                                <div class="card w-75 ">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-1"> 
-                                              <a href="/users/<%= item.postUser%>"> <img src="/<%= item.postImage %>" class="rounded-circle" alt="profile picture" height="50px" width="50px"></a> 
-                                            </div>
-                                            <div class="col pt-2">
-                                                <h5 class="card-title"><%= item.postUser %></h5>
-                                            </div>
-                                        </div>
-                                      
-                                      <p class="card-text pt-2"><%= item.postContent%></p>
-                                      <p class="fw-lighter mb-1"> <%= item.postDateString %> </p>
-                                    </div>
-                                  </div>
-                                </div>
-                                
-                                    
-                               
-        
-                            
-                        </ul>
-                
-                    </div>
-             <% } %>  
-        <% }) %>
-        
+          <% } %>
+            <% }) %>
+    </div>
 
-<%- include("partials/footer.ejs") %>
+
+  </div>
+  <%- include("partials/footer.ejs") %>
