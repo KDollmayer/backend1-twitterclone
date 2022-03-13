@@ -56,6 +56,8 @@ const requireLogin = (req, res, next) => {  //login middleware för get()
     }
 }
 
+
+
 //get
 app.get("/", (req, res) => {
     res.render("./login.ejs")
