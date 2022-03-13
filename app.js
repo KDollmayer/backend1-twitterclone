@@ -7,6 +7,9 @@ const bodyParser = require("body-parser")
 const multer = require("multer")
 const { User } = require("./models/user")
 const { Post } = require("./models/post")
+const { status } = require("express/lib/response")
+const errorController = require('./errorController');
+
 
 const app = express()
 const PORT = 3000
@@ -39,7 +42,12 @@ app.use(session({
   }))
 app.use(passport.authenticate("session"))
 
+
+
 app.use(bodyParser.urlencoded({extended: true}))
+
+
+
 
 const requireLogin = (req, res, next) => {  //login middleware för get()
        if (req.user) {
@@ -109,6 +117,9 @@ app.get("/index", requireLogin, async (req, res) => {
 
 app.post("/entries", async (req, res) => {
 
+
+    
+
     const postUser = req.user.username
     const postFirstname = req.user.firstname
     const postLastname = req.user.lastname
@@ -118,19 +129,35 @@ app.post("/entries", async (req, res) => {
     const postDateString = `${postDate.toLocaleDateString()} at ${postDate.toLocaleTimeString()}`
     const postImage = req.user.profileImage
 
-    const newPost = new Post({ 
-        postContent, 
-        postDate, 
-        postUser, 
-        postDateString, 
-        postImage , 
-        postFirstname, 
-        postLastname, 
-        postEmail 
-    })
+        try {
+            const newPost = new Post({ 
+                postContent, 
+                postDate, 
+                postUser, 
+                postDateString, 
+                postImage , 
+                postFirstname, 
+                postLastname, 
+                postEmail 
+            })
+            await newPost.save()
+            res.redirect("/index")
+            
+        } catch (error) {
+            
+            res.redirect("/index")
+            console.log(error)
+        }
+  
+        
+        
+            
+        
+    
+    
 
-    await newPost.save()
-    res.redirect("/index")
+    
+    
 })
 
 app.post("/signup", async (req, res) => {
