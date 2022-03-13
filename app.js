@@ -7,8 +7,6 @@ const bodyParser = require("body-parser")
 const multer = require("multer")
 const { User } = require("./models/user")
 const { Post } = require("./models/post")
-const { status } = require("express/lib/response")
-const errorController = require('./errorController');
 
 
 const app = express()
